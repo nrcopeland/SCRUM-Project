@@ -1,0 +1,112 @@
+Project Title: Apex Palate                          
+Authors: David Spence, Trey Truong, Hardy Patel, Michael Park, Mack Butler, Nathaniel Copeland
+CSCI 3300: Software Engineering 
+Department of Computer Science and Information Systems 
+University of North Georgia 
+Fall 2019
+
+
+Abstract
+
+
+Introduction
+
+Motivation: 
+In 2019, the restaurant failure rate in the United States was over 60% in their first year of business. Running a restaurant is a difficult task with many variables to consider. Coincidentally, we are working with Yelp dataset, so we want to come up with a way for restaurant owners or potential restaurant owners to succeed in their business endeavor. We approach this problem unorthodoxly by looking at current and past restaurants that have negative review trends, because we believe this area will yield data that may have not been studied yet. Decline in a restaurant can be caused by normal internal problems such as bad management, sanitary problems, budgeting, and etc. However, we want to look beyond these typical variables. Perhaps we can look at the problem in geographic, demographic, and popularity manners. For example, we can learn that Pho/Vietnamese restaurants are popular in Orange County because there is a huge population of Vietnamese residency, due to the large number migration of first-generation immigrants. Take Little Saigon for instance. Taking in account of its location and demographics, it might be a smart business move to start a business in the area catered to the Asian tongue palate. Or contradictingly because Pho restaurants are already saturated in Orange County, it's possible that it would be wiser to stay away from competing in this area. This is what we want to convey to the users. We want to show all the cards on the table so that the user is informed before making any big decisions such as starting a restaurant business. Furthermore, we want to emphasize the failure of restaurants may also be caused by environmental variables. For example, some questions we should ask ourselves is, “Is it surrounded by friendly neighborhoods? Is it walk-in friendly? Is there a school nearby? Does it have appropriate parking? What are the other neighboring businesses?”. All these questions are important, and their answers may just be the factors that could lead to the downfall of restaurants. At the very least, we want potential restaurant owners to learn from the businesses that rose and fell before them, so that they can succeed in their business endeavors. In the pursuit of extraordinary restaurants, in taste and in wealth, we present Apex Palate.  
+
+
+Problems:
+The main problems that we encountered in this project were time and technical constraints caused by the lack of experience and project deadlines. The purpose of this project was to experience software development in a small group environment. On an individual level, the members lacked skills to utilize the necessary tools for the project. These  These skills include the utilization of a wide variety of tools, from managing databases with SQLite, to formatting JSON files that javascript could interpret. Working in a group environment helped cover for individuals’ lack of experience, because group members can compensate for each other's weaknesses, allowing each member to focus on their strengths.
+
+Lack of time was also a serious issue due to the fact that we all had many other classes to manage, and jobs that demanded significant time dedication. We have been able to utilize online collaboration tools like shared Google documents and Discord to overcome a lot of the issues of not being able to meet in person daily as we would, if we were working on this project as a full time job.
+
+The yelp dataset was way too large to work with given the size and importance of this project. Our SQLite queries including the review text would take upwards of three hours each. The output of these queries would also be multiple gigabytes. This was less of a problem once we exported our new SQL tables into CSV that was then formatted into json. But each file was still larger than 100 megabytes which was larger than most online storage systems allow. At first we used dropbox, until we learned about Github’s large file storage which is the solution we ended up using.
+
+Another big problem we faced was formatting our json file in a way that D3 would be able to read properly. None of us were very familiar with python and much time was needed to figure out a solution. Eventually the defaultdict tool from the python collections class was found to work. 
+
+Originally, we were also going to do choropleth graph as well, but given the time we had and how incompatible it was with what we have envisioned. We decided to go with a zoomable sunburst and a line/time graph which represents the trend of a business from the start of the first rating to the last rating that business received.
+
+We were trying to come up with a way to visualize two graphs at once but we abandoned this path because this would break the integrity and structure of one graph if we tried to also display another graph on the screen at the same time. Our solution was to link in another html file(line/time graph) which would require another json file that is appropriate to the graph.
+
+
+Ideas:
+Our idea was to create a refined dataset like we mentioned above and parse it inside a visual tool for the user to see current trends and past trends including businesses that have been closed. Ultimately, we wanted the user to learn from failed businesses. This was to be accomplished by using a zoomable sunburst graph that we discovered in the D3 gallery examples. The idea was to make a huge amount of data available in a simple attractive way, to dive into different categories in a multibranched tree structure that would allow a user to get to the desired information in the quickest easiest way possible. This would give the user a way to look up a restaurant that matched their interests and read the reviews that might give clues to why a business failed.
+
+Abstractively, we wanted to come up with a way for the user to see beyond just the restaurant business environment. We wanted the user to learn more about the “whys” that certain businesses are failing. For example, the user can ask,  “Why a Chinese restaurant in Arizona is failing? Is there another competitor? Is it pedestrian friendly which promotes walked in and parking condition? Is there a another branch that is doing better geographically-wise? Is it relatively close to a strip mall?
+
+Our ideas is we first start out showing all the state on our zoomable sunburst diagram. While we are this visual tools, we can click to zoom in and out as we desire. When we click one of the slices which in this case is a state, the graph will zoom inward showing all types of restaurants. Then once we decided on a type of a restaurant, we will click to zoom in one more level. At this point, we should see the average rating and restaurants. Finally when we click on a restaurant to learn more about it, the graph should direct us to the next phase of our design. The 2nd phase of our design is the line graph which interacts and compliments well with the sunburst diagram for the logic we want to display to the user. This line graph will show all the ratings from beginning time when the restaurant was open to the latest rating it has received. 
+ 
+             
+
+
+Summary/contribution:  
+Basically, we want our users to be in the know about everything. The goods and the bads, everything can be a lesson for business owners.
+
+Although, this project will just be another write off on each of our resume or there may be a product like this that exist somewhere out there already, we learned so many things in the span of 4 months. We, 6 students, who will later become software engineers or data analyst will use these skills in the workforce in the future. This project may get picked up by a Yelp dataset enthusiast or maybe Professor K will make his students work on this whenever he does teach software engineer again, or we will continue to expand on this project until it is an official product in senior project class. At the very least, we took part in the Yelp dataset challenge in a way. 
+
+
+Proposed Methods
+
+We, firstly, have to refine the dataset into a smaller dataset. We first started slimmed the data by removing all businesses that were listed as still open at the end of our sample window, this decreased the size of our data set substantially. Then we isolated our data to six main cities that most of the reviews in our dataset came from. Once we had these cities isolated, we then needed to clean up the categories data.
+
+
+Design: 
+Using D3 visual tools to display our dataset json file. 
+Zoomable sunburst graph take the first json which contains city, type of restaurants, and average rating of the restaurant. 
+City > Type of restaurants > Lowest rating restaurant 
+
+After the restaurant was selected on the last zoom in on the zoomable sunburst graph, we will move to the 2nd phase of our design. The 2nd phase is a timeline which will show all the rating and comments left by the customers.
+
+Timeline graph: 
+Which will show the trend of the restaurant from the very first rating to the last rating the restaurant received. 
+
+
+
+
+Setup and Evaluation
+
+Software: 
+Apache2.4 to host our web server locally
+Ngrok for port tunneling to expose local web server to the Internet
+Github for backup link of our working software, and hosting our GIST on the respective account. 
+LFS GIT for our file storage, our Graphs uses our jsons file via our Github
+HTML, CSS, and Javascript for D3 tools
+Sqlite3 to refined the dataset, such as duplication or null values 
+OpenRefine for categorizing and export to different file type ie: csv or json
+Excel to test result
+notepad++/notepad for quick edits 
+
+Hardware: 
+Desktop/laptop multi-purposes.
+Cell Phone to test our visual on the mobile platform as well.
+
+
+Results
+
+Conclusions
+From our point of view, we were able to create concurrent duct taped alpha version of the software that we have envisioned. Because of time and other constraints, we did not do a list visual to list all our restaurants. Instead we use line graph as our second phase of our graph. Although we did not solve the problem or even achieve any feastable product. However, we believe that we were on the right track and our vision was solid.
+
+
+
+There are many things we could improve on, some of which are the following: 
+Better color scheme for the zoomable sunburst graph (parent and children).
+Refined more json file to see each restaurant trends. 
+Double down on our integrity check against our SQL query when refining datasets. 
+Pimp our HTML and CSS a little bit to feel personalized 
+A working domain, so we keep leaving our ngrok.exe and Apache running. 
+
+And a more ambitious goal that we want to achieve is to setup a database so we can work with live and concurrent data instead of sample dataset. As well as branching out to different categories of things like entertainment or services. 
+
+
+
+References 
+
+https://observablehq.com/@d3/zoomable-sunburst Mike Bostock, Zoomable Sunburst
+https://observablehq.com/@d3/line-chart Mike Bostock, Line chart
+https://ngrok.com/ 
+https://github.com/
+https://git-scm.com/
+https://git-lfs.github.com/   
+https://www.yelp.com/dataset/challenge 
+
+
