@@ -1,3 +1,4 @@
+ApexPalate.mp4 is the demo of the project.
 How to recreate the database and formatted json from scratch.
 -Download review.json and business.json
 -Download or copy/paste review.py and business.py
